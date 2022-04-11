@@ -59,6 +59,7 @@ class Luxury {
 
 ## 題目二
 計算 Rich 裡所有的總和 , 並回傳新的 object
+
 提示 : reduce
 
 ### Luxury
