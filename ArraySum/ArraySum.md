@@ -26,9 +26,8 @@
 ### js Sample
 ```js
 const luxury = [
-{ brand: 'LV', price: 43211 },
-{ brand: 'GUCCI', price: 56566 },
-{ brand: 'HERMES', price: 223378 },
-];
-
+  { brand: 'LV', price: 43211 },
+  { brand: 'GUCCI', price: 56566 },
+  { brand: 'HERMES', price: 223378 },
+ ];
 ```
