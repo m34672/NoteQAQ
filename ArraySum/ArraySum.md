@@ -3,6 +3,8 @@
 
 條件 : 請使用一行程式
 
+提示 : map , reduce
+
 ### Luxury
 
 ```json
