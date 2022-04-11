@@ -3,7 +3,7 @@
 
 條件 : 請使用一行程式
 
-###Luxury
+### Luxury
 
 ```json
 [
