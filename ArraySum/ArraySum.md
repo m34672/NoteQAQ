@@ -31,3 +31,28 @@ const luxury = [
   { brand: 'HERMES', price: 223378 },
 ];
 ```
+### Sample Java
+```java
+List<Luxury> list = new ArrayList<>();
+list.add(new Luxury("LV", 43211));
+list.add(new Luxury("GUCCI", 56566));
+list.add(new Luxury("HERMES", 223378));
+
+class Luxury {
+    String brand;
+    Integer price;
+
+    Luxury(String brand, Integer price) {
+        this.brand = brand;
+        this.price = price;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+}
+```
