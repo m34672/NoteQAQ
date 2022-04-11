@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+       * 練習 1 : 計算 luxury 裡 price 的總和
+       */
+      const luxury = [
+        { brand: 'LV', price: 43211 },
+        { brand: 'GUCCI', price: 56566 },
+        { brand: 'HERMES', price: 223378 },
+      ];
+
+      let result = luxury.map((e) => e.price).reduce((p, c) => p + c);
+      console.log(`result = ${result}`); // 323155
+
+      console.log('************************************************');
+      /*
+       * 練習 2 : 計算 rich 裡所有的總和 , 並回傳新的 array
+       */
+      const rich = [
+        { LV: 22222, GUCCI: 66666, HERMES: 222222 },
+        { LV: 33333, GUCCI: 77777, HERMES: 233333 },
+        { LV: 55555, GUCCI: 88888, HERMES: 255555 },
+      ];
+      let result2 = rich.reduce(
+        (p, c) => {
+          return {
+            LV: p.LV + c.LV,
+            GUCCI: p.GUCCI + c.GUCCI,
+            HERMES: p.HERMES + c.HERMES,
+          };
+        },
+        { LV: 0, GUCCI: 0, HERMES: 0 }
+      );
+      console.log('result =');
+      console.log(result2); // {LV: 111110, GUCCI: 233331, HERMES: 711110}
+    </script>
+  </body>
+</html>
