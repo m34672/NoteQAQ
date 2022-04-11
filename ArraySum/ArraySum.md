@@ -1,8 +1,10 @@
 ## 題目一   
 計算 luxury 裡 price 的總和
+
 條件 : 請使用一行程式
 
-###luxury
+###Luxury
+
 ```json
 [
     {
