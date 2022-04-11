@@ -23,7 +23,7 @@
     }
 ]
 ```
-### js Sample
+### Sample JavaScript
 ```js
 const luxury = [
   { brand: 'LV', price: 43211 },
