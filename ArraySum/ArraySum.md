@@ -58,3 +58,35 @@ class Luxury {
 ```
 
 ## 題目二
+計算 Rich 裡所有的總和 , 並回傳新的 object
+提示 : reduce
+
+### Luxury
+
+```json
+[
+    {
+        "LV": 22222,
+        "GUCCI": 66666,
+        "HERMES": 222222
+    },
+    {
+        "LV": 33333,
+        "GUCCI": 77777,
+        "HERMES": 233333
+    },
+    {
+        "LV": 55555,
+        "GUCCI": 88888,
+        "HERMES": 255555
+    }
+]
+```
+### Sample JavaScript
+```js
+const rich = [
+  { LV: 22222, GUCCI: 66666, HERMES: 222222 },
+  { LV: 33333, GUCCI: 77777, HERMES: 233333 },
+  { LV: 55555, GUCCI: 88888, HERMES: 255555 },
+];
+```
