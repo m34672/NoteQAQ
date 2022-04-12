@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React TodoList</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      /* React Hooks */
+      const { useState } = React;
+      /* 奢侈品牌 */
+      const LUXURY = ['LV', 'GUCCI', 'HERMES'];
+
+      const App = () => {
+        /* 傳入 State */
+        const [luxury, setLuxury] = useState(LUXURY);
+        const [message, setMessage] = useState('');
+        const [update, setUpdate] = useState(-1);
+
+        return (
+          <div className="container mx-auto flex justify-center mt-52 flex-col">
+            <h1 className="text-center text-2xl">React - To Do List</h1>
+            <div className="flex flex-row m-4">
+              <div className="basis-full flex justify-center">
+                <div>
+                  <input
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)} // 雙向綁定
+                    type="text"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
+                </div>
+                <div>
+                  <button
+                    onClick={() => setLuxury([message, ...luxury])} // add
+                    className="mx-2 active:relative top-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  >
+                    一個按鈕
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <ul className="mx-auto">
+              {luxury.map((name, i) => (
+                /* for */
+                <li className="mt-4" key={i}>
+                  <input
+                    disabled={update !== i}
+                    onChange={(e) => {
+                      luxury[i] = e.target.value;
+                      setLuxury([...luxury]);
+                    }} // 雙向綁定
+                    value={name}
+                    className="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 "
+                    type="text"
+                  />
+                  <button
+                    onClick={
+                      () => (update === i ? setUpdate(-1) : setUpdate(i)) // 判斷
+                    }
+                    className="m-2 px-2 my-auto active:relative top-1 bg-blue-500 hover:bg-blue-700 text-white rounded"
+                  >
+                    U
+                  </button>
+                  <button
+                    onClick={() => setLuxury(luxury.filter((e) => e !== name))}
+                    className="m-2 px-2 my-auto active:relative top-1 bg-red-500 hover:bg-blue-700 text-white rounded"
+                  >
+                    x
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      };
+
+      ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+  </body>
+</html>

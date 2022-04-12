@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue TodoList</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container mx-auto flex justify-center mt-52 flex-col">
+        <h1 class="text-center text-2xl">Vue - To Do List</h1>
+        <div class="flex flex-row m-4">
+          <div class="basis-full flex justify-center">
+            <div>
+              <!-- 雙向綁定 -->
+              <input
+                v-model="message"
+                type="text"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              />
+            </div>
+            <div>
+              <!-- add  -->
+              <button
+                @click="luxury = [message,...luxury]"
+                class="mx-2 active:relative top-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                一個按鈕
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <ul class="mx-auto">
+          <li v-for="(name, index) in luxury" :key="index" class="mt-4">
+            <!-- 雙向綁定 -->
+            <input
+              :disabled="update !== index"
+              v-model="luxury[index]"
+              class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
+              type="text"
+            />
+            <!-- 判斷 -->
+            <button
+              @click="update=== index ? update = -1 : update = index"
+              class="m-2 px-2 my-auto active:relative top-1 bg-blue-500 hover:bg-blue-700 text-white rounded"
+            >
+              U
+            </button>
+            <button
+              @click="luxury = luxury.filter(e=> e !== name)"
+              class="m-2 px-2 my-auto active:relative top-1 bg-red-500 hover:bg-blue-700 text-white rounded"
+            >
+              x
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      const LUXURY = ['LV', 'GUCCI', 'HERMES'];
+
+      Vue.createApp({
+        data() {
+          return {
+            luxury: LUXURY,
+            message: '',
+            update: -1,
+          };
+        },
+        methods: {},
+      }).mount('#app');
+    </script>
+  </body>
+</html>
