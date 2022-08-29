@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML5 Work02</title>
+    <style>
+      #img {
+        height: 300px;
+        width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>該瀏覽器有支援 worker 嗎 ? <span id="isWorker"></span></h3>
+    <h3 class="confirm">
+      請於
+      <span id="second">10</span>
+      秒內按下「確認」按鈕，確認資訊正確性，否則返回前一頁
+    </h3>
+    <hr />
+    <h1>Confirm 頁面</h1>
+    <h2>商品名稱： <span id="name"></span></h2>
+    <p>商品數量： <span id="count"></span></p>
+    <p>位置資訊經度：<span id="lng"></span></p>
+    <p>位置資訊緯度：<span id="lat"></span></p>
+    <p>商品圖：</p>
+    <img id="img" src="" alt="" />
+    <br />
+    <button type="button" id="confirm">確認</button>
+    <button onclick="history.go(-1)" type="button" id="reset">重填</button>
+    <script>
+      /**
+       * 全域變數
+       */
+      // 建立 Worker
+      const myWorker = new Worker('./worker_countdown.js');
+      const second = document.querySelector('#second');
+
+      /**
+       * 監聽
+       */
+      document.querySelector('#confirm').onclick = () => {
+        document.querySelector('.confirm').style.display = 'none';
+        myWorker.terminate();
+      };
+
+      /**
+       * init
+       */
+      function init() {
+        // 判斷是否支援
+        document.querySelector('#isWorker').innerHTML = window.Worker
+          ? '是'
+          : '否';
+        const form = JSON.parse(sessionStorage.getItem('form'));
+
+        // 取出跳轉資訊
+        for (const k in form) {
+          // 跳過圖片
+          if (k === 'img') {
+            document.querySelector('#img').src = form[k];
+            continue;
+          }
+          // 印上頁面
+          document.querySelector(`#${k}`).innerHTML = form[k];
+        }
+
+        myWorker.postMessage(10);
+
+        // 停止 worker 的執行
+        myWorker.onmessage = function (e) {
+          if (e.data < 0) return history.go(-1);
+          second.innerHTML = e.data;
+        };
+      }
+
+      window.addEventListener('load', init);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ArrayExample</title>
+    <style>
+      h1 {
+        /* 文字置中 */
+        text-align: center;
+      }
+      table {
+        /* table置中 */
+        margin: auto;
+        /* 文字寬度 */
+        font-weight: bold;
+      }
+      /* 指定第一個 tr */
+      tr:nth-child(1) {
+        /* 背景顏色 */
+        background-color: purple;
+        /* 文字顏色 */
+        color: white;
+      }
+      tr,
+      td {
+        /* 文字置中 */
+        text-align: center;
+        /* 內邊距 */
+        padding: 8px;
+        /* 邊框 */
+        border: 1px solid purple;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      document.write('<h1>班級通訊錄</h1>');
+      var arr = [
+        ['學號', '姓名', '電話', '地址'],
+        [94951001, '吳冠宏', '0911000333', '台北'],
+        [94951002, '吳永志', '0922999887', '桃園'],
+        [94951003, '李偉銘', '0933555779', '台南'],
+      ];
+
+      document.write('<table>');
+
+      for (var i = 0; i < arr.length; i++) {
+        document.write('<tr>');
+
+        for (j = 0; j < 4; j++) {
+          document.write('<td>' + arr[i][j] + '</td>');
+        }
+
+        document.write('</tr>');
+      }
+
+      document.write('</table>');
+    </script>
+  </body>
+</html>

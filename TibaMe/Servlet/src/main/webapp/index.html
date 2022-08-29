@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container" style="border: 2px solid blue">
+      <div class="row">
+        <div
+          class="col-xl-6 d-none d-xl-block row"
+          style="border: 2px solid red"
+        >
+          <div class="col-6">我在這</div>
+          <div class="col-6">我在這</div>
+        </div>
+        <div class="col-xl-6 d-none d-xl-block">1</div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      // fetch('http://localhost:8080/TGA102API/user', {})
+      //   .then((res) => res.json())
+      //   .then((res) => {
+      //     console.log(res);
+      //   });
+      axios
+        .post('http://localhost:8989/TGA102APIv1/user', {
+          name: '次子',
+          age: 6,
+        })
+        .then((res) => {
+          if (res.data.code === 200) return alert('ok');
+          alert('不OK');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      // axios.delete('http://localhost:8989/TGA102APIv1/user/8');
+      // axios.get(
+      //   'https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=20220627&stockNo=2330&_=1656325466672'
+      // );
+    </script>
+  </body>
+</html>

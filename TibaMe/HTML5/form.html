@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML5 Work01</title>
+    <style>
+      .pre-img {
+        height: 200px;
+        width: 500px;
+      }
+      .pre-img > img {
+        max-height: 100%;
+        max-width: 100%;
+      }
+      #drop_zone {
+        border: 1px dashed #ccc;
+        height: 50px;
+        position: relative;
+      }
+      #drop_zone span.text {
+        position: absolute;
+        display: inline-block;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        color: lightgray;
+      }
+      #drop_zone.-on {
+        border: 1px dashed lightblue;
+        box-shadow: 3px 3px 5px lightblue inset, -3px -3px 5px lightblue inset;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>是否支援全螢幕模式 : <span id="isFull"></span></h3>
+    <h3>是否支援地理資訊位置定位 : <span id="isMap"></span></h3>
+
+    商品名稱 :
+    <input type="text" id="name" />
+    <span id="product"></span>
+
+    <br />
+    商品數量 <input type="range" min="1" max="10" value="1" id="p_count" />
+    <span id="count">1</span>
+
+    <br />
+    <input type="file" id="p_file" />
+    <div id="drop_zone"><span class="text">圖片拖曳至此處</span></div>
+    <div class="pre-img">
+      <img id="img" src="" alt="" />
+    </div>
+    <br />
+    <label>經度：</label><input type="text" id="lng" readonly />
+    <label>緯度：</label><input type="text" id="lat" readonly />
+    <br />
+    <br />
+    <button id="btn_reset" type="reset">清空資料</button>
+    <button type="button" id="btn_submit">送出資料</button>
+    <br />
+    <button type="button" id="btn_full">進入全螢幕模式</button>
+    <script>
+      /*
+       * 取得資訊
+       */
+      const name = document.querySelector('#name');
+      const product = document.querySelector('#product');
+      const pCount = document.querySelector('#p_count');
+      const count = document.querySelector('#count');
+      const file = document.querySelector('#p_file');
+      const img = document.querySelector('#img');
+      const drop = document.querySelector('#drop_zone');
+      const onFull = document.querySelector('#btn_full');
+      const onReset = document.querySelector('#btn_reset');
+      const lng = document.querySelector('#lng');
+      const lat = document.querySelector('#lat');
+      const submit = document.querySelector('#btn_submit');
+
+      const data = {
+        name: '',
+        count: '',
+        lng: '',
+        lat: '',
+        img: '',
+      };
+
+      /**
+       * 監聽事件
+       */
+      // 監聽輸入
+      name.onchange = () =>
+        ([product.innerHTML, data.name] = [name.value, name.value]);
+
+      // 監聽移動
+      pCount.onmousemove = () =>
+        ([count.innerHTML, data.count] = [pCount.value, pCount.value]);
+
+      // 預覽圖片
+      file.onchange = (e) => {
+        /**
+         * base64
+         */
+        let reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload = (e) =>
+          ([data.img, img.src] = [e.target.result, e.target.result]);
+
+        /**
+         * blob
+         */
+        // let blob = window.URL.createObjectURL(e.target.files[0]);
+        // img.setAttribute('src', blob);
+        // data.img = blob;
+      };
+
+      // 進入時更改顏色
+      drop.ondragenter = (e) => {
+        drop.style.borderColor = 'blue';
+        e.stopPropagation();
+        e.preventDefault();
+      };
+      // 取消預設
+      drop.ondragover = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+      };
+      // drop後 預覽圖片
+      drop.ondrop = (e) => {
+        /**
+         * base64
+         */
+        let reader = new FileReader();
+        reader.readAsDataURL(e.dataTransfer.files[0]);
+        drop.style.borderColor = '';
+
+        reader.onload = (e) =>
+          ([img.src, data.img] = [e.target.result, e.target.result]);
+
+        e.stopPropagation();
+        e.preventDefault();
+      };
+      // 離開後改變顏色
+      drop.ondragleave = (e) => {
+        drop.style.borderColor = '';
+        e.stopPropagation();
+        e.preventDefault();
+      };
+
+      // 全螢幕模式
+      onFull.onclick = () => {
+        // 判斷是否為空
+        !document.fullscreenElement
+          ? onFull.requestFullscreen()
+          : document.exitFullscreen();
+      };
+
+      // 清空資料
+      onReset.onclick = () => reset();
+
+      // 送出
+      submit.onclick = () => {
+        sessionStorage.setItem('form', JSON.stringify(data));
+        location.href = 'confirm.html';
+      };
+
+      /**
+       * init
+       */
+      function init() {
+        // 判斷是否全螢幕
+        document.querySelector('#isFull').innerHTML = document.fullscreenEnabled
+          ? '是'
+          : '否';
+
+        //判斷是否支援地圖
+        navigator.geolocation ? position(true) : position(false);
+        let form = JSON.parse(sessionStorage.getItem('form'));
+
+        if (!!form) {
+          for (const k in data) {
+            data[k] = form[k];
+            // 跳過圖片
+            if (k === 'img') {
+              document.querySelector('#img').src = form[k];
+              continue;
+            }
+
+            // 跳過商品
+            if (k === 'name') {
+              [name.value, product.innerHTML] = [form[k], form[k]];
+              continue;
+            }
+
+            if (k === 'count') pCount.value = form[k];
+
+            // 印上頁面
+            document.querySelector(`#${k}`).innerHTML = form[k];
+          }
+          console.log(data);
+        }
+      }
+
+      window.addEventListener('load', init);
+
+      /**
+       * default
+       */
+      // 清空
+      function reset() {
+        [
+          name.value,
+          pCount.value,
+          count.innerHTML,
+          file.value,
+          lng.value,
+          lat.value,
+          product.innerHTML,
+          preImg.src,
+        ] = ['', 1, 1, '', '', '', '', ''];
+      }
+
+      // 位置
+      function position(b) {
+        if (b) {
+          document.querySelector('#isMap').innerHTML = '是';
+          navigator.geolocation.getCurrentPosition(
+            (p) => {
+              [data.lng, data.lat] = [p.coords.longitude, p.coords.latitude];
+              lng.value = p.coords.longitude;
+              lat.value = p.coords.latitude;
+            },
+            (error) => {
+              alert(error.message);
+              lng.value = '使用者不同意';
+              lat.value = '把位置資訊給你';
+              lng.disabled = true;
+              lat.disabled = true;
+            },
+            {
+              enableHighAccuracy: true,
+              maximumAge: 0,
+              timeout: 5000,
+            }
+          );
+        } else {
+          document.querySelector('#isMap').innerHTML = '否';
+          lng.value = '此網頁版本太舊囉';
+          lat.value = '獲取不到資料囉';
+          lng.disabled = true;
+          lat.disabled = true;
+        }
+      }
+    </script>
+  </body>
+</html>

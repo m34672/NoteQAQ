@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 400px;
+      }
+      #show_L img {
+        width: 100%;
+      }
+      .all_img {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .all_img img {
+        width: 80%;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="box">
+      <div id="show_L">
+        <img src="img/a1.png" alt="" />
+      </div>
+      <div class="all_img">
+        <img src="img/a1.png" alt="" />
+        <img src="img/a2.png" alt="" />
+        <img src="img/a3.png" alt="" />
+        <img src="img/a4.png" alt="" />
+      </div>
+    </div>
+  </body>
+  <script>
+    /*
+     * 高階函數寫法
+     */
+    function init() {
+      // 替換大圖
+      const show = (name) =>
+        document
+          .querySelector('#show_L img')
+          .setAttribute('src', `img/a${name + 1}.png`);
+
+      //抓小圖註冊事件
+      document
+        .querySelectorAll('.all_img img')
+        .forEach((e, i) => (e.onclick = () => show(i)));
+    }
+
+    /*
+     * 一般寫法
+     */
+    // // 獲取全部的小圖片
+    // const imgBtn = document.querySelectorAll('.all_img img');
+    // // 獲取替換圖片
+    // const show = document.querySelector('#show_L img');
+
+    // function init() {
+    //   imgBtn.forEach((e, i) => {
+    //     // 綁定所有標籤
+    //     imgBtn[i].onclick = () => {
+    //       // 替換大圖片的 src 屬性
+    //       show.setAttribute('src', `img/a${i + 1}.png`);
+    //     };
+    //   });
+    // }
+
+    // 頁面載入後執行
+    window.addEventListener('load', init);
+  </script>
+</html>
