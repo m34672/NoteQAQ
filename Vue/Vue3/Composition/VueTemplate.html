@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VueTemplate</title>
+    <!-- https://vuejs.org/ -->
+    <script src="https://unpkg.com/vue@3"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{ message }}</h1>
+      <button @click="btn">按鈕</button>
+    </div>
+  </body>
+  <script>
+    const { createApp, ref, reactive, onMounted } = Vue;
+
+    const App = {
+      setup() {
+        console.log('Created');
+        const message = 'Hello Vue3';
+        const btn = () => alert('Hello btn!');
+
+        onMounted(() => {
+          console.log('Mounted');
+        });
+
+        return {
+          message,
+          btn,
+        };
+      },
+    };
+
+    const app = Vue.createApp(App);
+    app.mount('#app');
+  </script>
+</html>
