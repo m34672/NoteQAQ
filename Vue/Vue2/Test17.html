@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 複習 v-for 與 學習v-for陣列 -->
+    <div id="app">
+      <h2>{{counter}}</h2>
+      
+      <ul>
+        <li v-for="Books in books">{{Books}}</li>
+      </ul>
+
+      <ul>
+        <li v-for="(Books,index) in books">{{index+1}}.{{Books}}</li>
+      </ul>
+
+
+      <ul>
+        <li v-for="Info in info">{{Info}}</li>
+      </ul>
+
+      <ul>
+        <li v-for="(Info,key) in info">{{Info}}--{{key}}</li>
+      </ul>
+
+      <button @click="btn">我是按鈕</button>
+      <ul>
+        <li v-for="Count in count" :key='Count'>{{Count}}</li>
+      </ul>
+    </div>
+
+    <script src="/js/jq/jquery-3.6.0.min.js"></script>
+    <script src="/js/Vue/vue.js"></script>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          counter: 'Hello Vue.js',
+          books:['我們不結婚好嗎','貓空愛情故事','B棟11F','聽笨金魚在唱歌'],
+          info:{
+            name:'why',
+            age:18,
+            height:1.88,
+          },
+          count:[5,3,2,1,4]
+        },
+        computed: {
+        },
+        methods: {
+          btn(){
+            // 1.push 往最後一個新增
+            // this.count.push('aaa')
+
+            // 2.pop() 刪除最後一個
+            // this.count.pop()
+          
+            // 3.shift() 刪除第一個
+            // this.count.shift()
+          
+            // 4.unshift() 在最前面新增
+            // this.count.unshift('123','456','789')
+
+            // 5.splice 刪除/替換/插入
+            // 刪除.從陣列1開始刪除後面3個
+            // this.count.splice(1,3)
+
+            // 替換.從陣列1開始刪除後面3個，然後替換後面三個
+            // this.count.splice(1,3,'7','8','9')
+
+            // 插入.從陣列1開始刪除後面0個，然後新增後面三個
+            // this.count.splice(1,0,'7','8','9')
+
+            // 6.sort() 排序
+            // this.count.sort()
+
+            // 7.reverse() 反轉
+            // this.count.reverse()
+
+            // Vue有提供set方法
+            // 指定這個陣列[0]改為aaa
+            // Vue.set(this.count,0,'aaa')
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

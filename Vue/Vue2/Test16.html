@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!--練習 v-if else show-->
+    <div id="app">
+      <h2>{{counter}}</h2>
+
+      <div v-show="isShow">123</div>
+      <div v-if="isShow">
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+      </div>
+      <h1 v-else>我消失了</h1>
+      <button @click="btn">我是按鈕</button>
+      <button @click="isShow = !isShow">我是按鈕</button>
+      <br />
+
+      <h1>{{result}}</h1>
+    </div>
+
+    <script src="/js/jq/jquery-3.6.0.min.js"></script>
+    <script src="/js/Vue/vue.js"></script>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          counter: "Hello Vue.js",
+          isShow: true,
+          i: 90,
+        },
+        computed: {
+          result() {
+            let show = "";
+            if (this.i >= 90) {
+              show = "優秀";
+            } else {
+              show = "普通";
+            }
+            return show;
+          },
+        },
+        methods: {
+          btn() {
+            this.isShow = !this.isShow;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

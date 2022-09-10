@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!--  v-model checkbox 練習 -->
+
+    <div id="app">
+      <h1>{{ message }}</h1>
+      <!-- 單選框 -->
+      <label for="license">
+        <input type="checkbox" id="license" v-model="islicense" />同意內容
+        <h2>您選擇的是{{islicense}}</h2>
+        <button :disabled="!islicense">下一步</button>
+      </label>
+
+      <!-- 多選框 -->
+      <br /><br />
+      <input type="checkbox" value="籃球" v-model="hobbies" />籃球
+      <input type="checkbox" value="羽毛球" v-model="hobbies" />羽毛球
+      <input type="checkbox" value="乒乓球" v-model="hobbies" />乒乓球
+      <input type="checkbox" value="足球" v-model="hobbies" />足球
+      <br />
+      <h2>{{hobbies}}</h2>
+    </div>
+
+    <script src="js/Vue/vue.js"></script>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          message: "Hello Vue!",
+          islicense: false,
+          hobbies: [],
+        },
+        methods: {},
+      });
+    </script>
+  </body>
+</html>

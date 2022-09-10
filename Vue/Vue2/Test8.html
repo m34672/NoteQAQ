@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .blue {
+        color: blue;
+      }
+      .red {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- v-bind 練習2 -->
+    <div id="app">
+      {{message}}
+      <h2 :class="{blue:b,red:r}" @click="color">我是測試文字</h2>
+      <h2 v-bind:class="{red:r}">我是測試文字</h2>
+      <h2 :class="getcolor()">我也是測試文字</h2>
+      <button @click="color">我是按鈕</button>
+    </div>
+
+    <script src="/js/Vue/vue.js"></script>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          message: "Hello Vue!",
+          b: true,
+          r: true,
+        },
+        methods: {
+          color() {
+            this.r = !this.r;
+          },
+          getcolor() {
+            return { blue: this.b, red: this.r };
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

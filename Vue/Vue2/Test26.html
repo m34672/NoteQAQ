@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 組件變數 練習 -->
+
+    <div id="app">
+      <h1>{{ message }}</h1>
+      <cpn></cpn>
+    </div>
+
+    <template id="cpn">
+      <div>
+        <h2>{{books}}</h2>
+        <p>我是內容YO</p>
+      </div>
+    </template>
+
+    <!-- data是一個函數 -->
+    <script src="js/Vue/vue.js"></script>
+    <script>
+      Vue.component("cpn", {
+        template: "#cpn",
+        data() {
+          return {
+            books: "我們不結婚好嗎？",
+          };
+        },
+      });
+
+      var app = new Vue({
+        el: "#app",
+        data: {
+          message: "Hello Vue!",
+        },
+
+        // 區域組件
+        components: {},
+      });
+    </script>
+  </body>
+</html>

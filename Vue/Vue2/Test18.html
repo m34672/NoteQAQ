@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>購物車練習</title>
+    <style>
+      * {
+        font-size: 1.2rem;
+      }
+
+      table {
+        border: brown 2px solid;
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      th,
+      td {
+        width: 200px;
+        padding: 8px 16px;
+        border: steelblue 2px solid;
+        /* text-align: left; */
+        text-align: center;
+      }
+
+      th {
+        background-color: #f7f7f7;
+        color: #5c6b77;
+        font-weight: 600;
+      }
+      .display{
+        display: none;
+      }
+      input {
+        width: 95%;
+        height: 100%;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 購物車練習 -->
+    <div id="app">
+    <!-- <cpn2></cpn2> -->
+      <button @click="btn">我是按鈕</button>
+
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>小說名稱</th>
+            <th>出版日期</th>
+            <th>價格</th>
+            <th>購買數量</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(Books,index) in books" >
+            <!-- <cpn2></cpn2> -->
+            <td>
+              {{Books.id}}
+              <br>
+              <input type="text" v-model="Books.id" :class="display(index) "></td>
+            <td>{{Books.name}}</td>
+            <td>{{Books.date}}</td>
+            <td>{{getFinalPrice(Books.price)}}</td>
+            <!-- <td>{{Books.price | showPrice}}</td> -->
+            <td>
+              <button @click="decrement(index)" :disabled="Books.count <= 1">
+                -
+              </button>
+              {{Books.count}}
+              <button @click="increment(index)">+</button>
+            </td>
+            <td>
+              <button @click="removebtn(index)">移除</button>
+              <button @click="update(index)">修改</button>
+            </td>
+          </tr>
+          <!-- <tr v-for="(Test,index) in test" :key="item.id">
+          <td><input style="width: 200px;" type="text" v-model="test[0].id"></td>
+          <td><input type="text" v-model="test[0].name"></td>
+          <td><input type="text" v-model="test[0].date"></td>
+          <td><input type="text" v-model="test[0].price"></td>
+          <td><input type="text" v-model="test[0].count"></td>
+          <td>
+          <button @click="">確認修改</button>
+          </td>
+      -->
+        </tbody>
+      </table>
+      <br />
+
+      <h2>總價格:{{totalPrice | showPrice}}</h2>
+    </div>
+
+
+    <template id="cpn1">
+      <div>
+        <h2>我是標題</h2>
+        <p>我是內容YO</p>
+      </div>
+    </template>
+    
+ 
+
+    <script src="/js/jq/jquery-3.6.0.min.js"></script>
+    <script src="/js/Vue/vue.js"></script>
+    <script>
+      Vue.component("cpn1", {
+        template: "#cpn1",
+      });
+
+      var app = new Vue({
+        el: "#app",
+        data: {
+          dis: true,
+          b:true,
+          dindex:-1,
+          test: [
+            {
+              id: 1,
+              name: "我們不結婚好嗎？",
+              date: "2006-9",
+              price: 180.0,
+              count: 1,
+            },
+          ],
+          books: [
+            {
+              id: 1,
+              name: "我們不結婚好嗎？",
+              date: "2006-9",
+              price: 180.0,
+              count: 1,
+            },
+            {
+              id: 2,
+              name: "貓空愛情故事",
+              date: "2007-9",
+              price: 220.0,
+              count: 1,
+            },
+            {
+              id: 3,
+              name: "B棟11F",
+              date: "2008-9",
+              price: 240.0,
+              count: 1,
+            },
+            {
+              id: 4,
+              name: "六弄咖啡館",
+              date: "2009-9",
+              price: 280.0,
+              count: 1,
+            },
+          ],
+        },
+        methods: {
+          increment(index) {
+            this.books[index].count++;
+          },
+          decrement(index) {
+            this.books[index].count--;
+          },
+          getFinalPrice(price) {
+            return "$" + price.toFixed(2);
+          },
+          removebtn(index) {
+            this.books.splice(index, 1);
+          },
+          btn() {
+            let bk = {
+              id: 4,
+              name: "六弄咖啡館",
+              date: "2009-9",
+              price: 280.0,
+              count: 1,
+            };
+            this.books.push(bk);
+          },
+          display(index){
+            if(this.dindex != index){
+              return {display:this.b}
+            }else{
+              return {display:!this.b}
+            }
+          },
+          update(index) {
+            this.dindex = index;
+            console.log(this.books[index].id)
+          },
+        },
+        computed: {
+          totalPrice() {
+            let totalPrice = 0;
+            for (let i = 0; i < this.books.length; i++) {
+              totalPrice += this.books[i].price * this.books[i].count;
+            }
+            return totalPrice;
+          },
+        },
+        filters: {
+          showPrice(price) {
+            return "$" + price.toFixed(2);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

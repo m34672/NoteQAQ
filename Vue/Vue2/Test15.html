@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!--練習監聽v-on -->
+    <div id="app">
+      <h2>{{counter}}</h2>
+      <div @click="divclick">
+        <button @click.stop="btnclick">我是按鈕</button>
+      </div>
+      <br />
+      <form action="123">
+        <input type="submit" value="主動提交" @click="submitclick" />
+        <input
+          type="submit"
+          value="停止主動提交"
+          @click.prevent="submitclick"
+        />
+        <br />
+      </form>
+      <br />
+
+      <input type="text" @keyup.enter="keyup" />
+    </div>
+
+    <script src="/js/jq/jquery-3.6.0.min.js"></script>
+    <script src="/js/Vue/vue.js"></script>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          counter: "Hello Vue.js",
+          abc: 123,
+        },
+        computed: {},
+        methods: {
+          divclick() {
+            console.log("div被點了");
+          },
+          btnclick() {
+            console.log("btn被點了");
+          },
+          submitclick() {
+            console.log("我被點了");
+          },
+          keyup() {
+            console.log("我輸入了按鍵");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .blue {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 作業練習 -->
+    <!-- <div id="app">
+      {{tibame}}
+      <ul>
+        <li
+          @click="button(index)"
+          v-for="(m,index) in news"
+          :class="color(index)"
+        >
+          {{index}}{{m}}
+        </li>
+      </ul>
+    </div> -->
+
+    <div id="app">
+      <h1>{{hi}}</h1>
+      <ul>
+        <li
+          v-for="(Books,index) in books"
+          :class="{blue:bindex===index}"
+          @click="lic(index)"
+        >
+          {{Books}}
+        </li>
+      </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <!-- <script src="/js/Vue/vue.js"></script> -->
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: {
+          hi: 'Hello,Vue.js',
+          // books: ["我們不結婚好嗎", "貓空愛情故事", "B棟11F", "聽笨金魚在唱歌"],
+          books: [
+            'この素晴らしい世界に祝福を',
+            '東京グール',
+            'SBY-FAMILY',
+            '心靈判官',
+          ],
+          bindex: -1,
+        },
+        methods: {
+          lic(index) {
+            this.bindex = index;
+          },
+        },
+      });
+
+      // var app = new Vue({
+      //   el: "#app",
+      //   data: {
+      //     tibame: "提拔我",
+      //     news: ["新聞一", "新聞二", "新聞三"],
+      //     b: false,
+      //     index: -1,
+      //   },
+      //   methods: {
+      //     color(index) {
+      // if (this.index == index) {
+      //   return { blue: !this.b };
+      // } else {
+      //   return { blue: this.b };
+      // }
+      //     },
+      //     button(index) {
+      //       this.index = index;
+      //     },
+      //   },
+      // });
+    </script>
+  </body>
+</html>

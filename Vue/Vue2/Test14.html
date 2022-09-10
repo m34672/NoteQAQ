@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!--複習v-on -->
+    <div id="app">
+      <h2>{{counter}}</h2>
+      <button v-on:click="increment">+</button>
+      <button @click="decrement">-</button>
+
+      <button @click="btn">我是沒參數的按鈕</button>
+      <button @click="btn2">需要參數但我沒輸入</button>
+      <button @click="btna(abc,$event)">需要參數又能傳回event</button>
+    </div>
+
+    <script src="/js/jq/jquery-3.6.0.min.js"></script>
+    <script src="/js/Vue/vue.js"></script>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          counter: 0,
+          abc: 123,
+        },
+        computed: {},
+        methods: {
+          increment() {
+            this.counter++;
+          },
+          decrement() {
+            this.counter--;
+          },
+          btn() {
+            console.log("我按了一下");
+          },
+          btn2(event) {
+            console.log("...", event);
+          },
+          btna(abc, event) {
+            console.log("...", abc, event);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

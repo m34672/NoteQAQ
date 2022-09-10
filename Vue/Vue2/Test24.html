@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 組件練習 練習 -->
+
+    <div id="app">
+      <h1>{{ message }}</h1>
+      <cpn1></cpn1>
+      <br /><br />
+      <cpn2></cpn2>
+    </div>
+
+    <script src="js/Vue/vue.js"></script>
+    <script>
+      // 1.全局組件註冊構造
+      const cpn1 = Vue.extend({
+        template: `
+          <div>
+            <h2>我是標題</h2>
+            <p>我是內容YO</p>
+          </div>
+        `,
+      });
+      // 2.註冊組建
+      // Vue.component('cpn1',cpn1)
+
+      // 語法糖
+      Vue.component("cpn1", {
+        template: `
+          <div>
+            <h2>我是標題</h2>
+            <p>我是內容YO</p>
+          </div>
+        `,
+      });
+
+      var app = new Vue({
+        el: "#app",
+        data: {
+          message: "Hello Vue!",
+        },
+        // 區域組件
+        components: {
+          cpn2: {
+            template: ` 
+          <div>
+            <h2>我是標題</h2>
+            <p>我是內容YO</p>
+          </div>
+        `,
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

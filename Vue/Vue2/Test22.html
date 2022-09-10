@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!--  v-model checkbox 練習 -->
+
+    <div id="app">
+      <h1>{{ message }}</h1>
+      <!-- 單選練習 -->
+      <select name="book" id="" v-model="book">
+        <option value="我們不結婚好嗎？">我們不結婚好嗎？</option>
+        <option value="貓空愛情故事">貓空愛情故事</option>
+        <option value="B棟11F">B棟11F</option>
+        <option value="六弄咖啡館">六弄咖啡館</option>
+      </select>
+      <h2>您選擇的結果是: {{book}}</h2>
+      <!-- 多選練習 -->
+
+      <select name="book" id="" v-model="books" multiple>
+        <option value="我們不結婚好嗎？">我們不結婚好嗎？</option>
+        <option value="貓空愛情故事">貓空愛情故事</option>
+        <option value="B棟11F">B棟11F</option>
+        <option value="六弄咖啡館">六弄咖啡館"</option>
+      </select>
+      <h2>您選擇的結果是: {{books}}</h2>
+      <br /><br />
+      <button @click="test">我是按鈕</button>
+      <!-- 動態綁值 -->
+      <label v-for="BK in bk" :for="BK">
+        <input type="checkbox" :value="BK" :id="BK" v-model="books" />{{BK}}
+      </label>
+    </div>
+
+    
+
+    <script src="js/Vue/vue.js"></script>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          message: "Hello Vue!",
+          book: "",
+          books: [],
+          bk: ["我們不結婚好嗎", "貓空愛情故事", "B棟11F", "聽笨金魚在唱歌"],
+        },
+        methods: {
+          test(){
+            
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

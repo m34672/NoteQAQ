@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .div-img > img {
+        width: 200px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- v-bind 練習 -->
+    <div id="app">
+      {{message}}
+      <div class="div-img"><img v-bind:src="cat" alt="" /></div>
+      <a :href="yahoo">雅虎</a>
+    </div>
+
+    <script src="/js/Vue/vue.js"></script>
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: {
+          message: 'Hello Vue!',
+          cat: 'https://static.toiimg.com/photo/msid-67586673/67586673.jpg?3918697',
+          yahoo: 'tw.yahoo.com',
+        },
+      });
+    </script>
+  </body>
+</html>

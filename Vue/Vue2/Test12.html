@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+        }
+    </style>
+  </head>
+  <body>
+      <!-- computed 練習 複雜版 -->
+    <div id="app">
+      {{message}}
+      <h2>我是總價格：{{totalPrice}}</h2>
+      <h2 v-for="m in books" >{{m}}</h2>
+    </div>
+
+    <script src="/js/jq/jquery-3.6.0.min.js"></script>
+    <script src="/js/Vue/vue.js"></script>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          books:[
+            {id:100,name:'我們不結婚好嗎',Price:220},
+            {id:110,name:'聽笨金魚在唱歌',Price:180},
+            {id:120,name:'b棟11F',Price:150},
+            {id:130,name:'六弄咖啡館',Price:120},
+          ]
+        },
+        computed:{
+          totalPrice(){
+            let result = 0;
+            for(let i=0;i<this.books.length;i++){
+              result += this.books[i].Price
+            }
+            return result
+          }
+        },
+        methods:{
+        },
+
+
+
+      });
+    </script>
+  </body>
+</html>

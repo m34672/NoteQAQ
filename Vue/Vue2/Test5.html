@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- v-once 別人修改後不變 -->
+    <!-- v-html 向內輸入html標籤-->
+    <!-- v-cloak 在vue讀入後取消 -->
+    <div id="app">
+      <h1 v-cloak>{{width}}</h1>
+      <h1 v-cloak v-once>{{width}}</h1>
+      <h1 v-cloak>{{width}}</h1>
+      <h1 v-html="yahoo"></h1>
+      <h1 v-html="fb"></h1>
+    </div>
+
+    <script src="js/Vue/vue.js"></script>
+    <script>
+      var yahoo = "https://tw.yahoo.com";
+
+      setTimeout(function () {
+        var app = new Vue({
+          el: "#app",
+          data: {
+            width: "123",
+            yahoo: '<a href="' + yahoo + '">我是雅虎</a>',
+            fb: '<a href="https://www.facebook.com/">我是臉書</a>',
+          },
+          methods: {},
+        });
+      }, 1000);
+    </script>
+  </body>
+</html>

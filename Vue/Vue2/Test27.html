@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 父傳給子值 練習 -->
+
+    <div id="app">
+      <h1>{{ message }}</h1>
+      <!-- <cpn :cbooks="books" :cmessage="message"></cpn> -->
+      <!-- //如果有駝峰用-分開 v-bind 3以下不支持-->
+      <cpn :c-books="books"></cpn>
+      <!-- <cpn></cpn> -->
+    </div>
+
+    
+    <template id="cpn">
+      <div>
+        <p>{{cBooks}}</p>
+        <h2>{{cmessage}}</h2>
+      </div>
+    </template>
+
+    <script src="js/Vue/vue.js"></script>
+    <script>
+      // 父傳子使用 props
+      const cpn = {
+        template: '#cpn',
+        // props: ['cbooks', 'cmessage'],
+        props:{
+          //限制類型
+          // cbooks:Array,
+          // cmessage:String,
+
+          // 類型默認，以及必傳值
+          cmessage:{
+            type:String,
+            default:'HI Ming',
+            //必需傳入 ( 可除錯用 )
+            // required:true,
+          },
+          //接受後回傳
+          cBooks:{
+            type:Array,
+            default(){
+              return[]
+            }
+          },
+        },
+        data() {
+          return {
+          };
+        },
+      };
+
+      var app = new Vue({
+        el: "#app",
+        data: {
+          message: "Hello Vue!",
+          books: ["我們不結婚好嗎", '貓空愛情故事'],
+        },
+        // 區域組件
+        components: {
+          // es6語法
+            cpn
+        },
+      });
+    </script>
+  </body>
+</html>
